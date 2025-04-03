@@ -291,7 +291,7 @@ const Header = () => {
               <Link
                 id="btn-login"
                 className={`btn ${navbarTheme.loginButtonClasses} max-md:!p-2 group`}
-                href={links.LOGIN}
+                href={links.CONTACT_US}
                 onClick={onLinkClick}
               >
                 <div
@@ -299,27 +299,27 @@ const Header = () => {
                   id="login-icon-1"
                 >
                   <Image
-                    src={loginBlueIcon}
+                    src={inquiryBlueIcon}
                     alt="login blue icon"
                     className="w-5 h-5 block group-hover:hidden"
                   />
                   <Image
-                    src={loginWhiteIcon}
+                    src={inquiryBlueIcon}
                     alt="login white icon"
                     className="w-5 h-5 hidden group-hover:block"
                   />
                 </div>
                 <Image
-                  src={loginWhiteIcon}
+                  src={inquiryWhiteIcon}
                   alt="login icon"
                   className={navbarTheme.loginIconClasses}
                   id="login-icon"
                 />
-                <span className="hidden md:block">login</span>
+                <span className="hidden md:block">Contact</span>
               </Link>
             ) : (
               <>
-                <button
+                {/* <button
                   id="btn-my-account"
                   className={`btn ${navbarTheme.loginButtonClasses} max-md:p-3 group`}
                   onClick={goToMyAccountButtonClickHandler}
@@ -346,12 +346,12 @@ const Header = () => {
                     id="login-icon"
                   />
                   <span className="hidden md:block">Go to my account</span>
-                </button>
+                </button> */}
               </>
             )}
             {pathname !== links.HOME ? (
               <>
-                <button
+                {/* <button
                   id="btn-inquiry"
                   className={`btn ${navbarTheme.inquiryButtonClasses} max-md:!p-3 group `}
                   onClick={() => {
@@ -381,7 +381,7 @@ const Header = () => {
                     id="inquiry-icon"
                   />
                   <span className="hidden md:block">Contact us</span>
-                </button>
+                </button> */}
               </>
             ) : (
               ""
@@ -393,13 +393,13 @@ const Header = () => {
                 <Image
                   src={navbarTheme.logo}
                   alt="logo"
-                  className="object-contain w-20 hover:scale-105 transition-transform duration-500"
+                  className="object-contain w-40 hover:scale-105 transition-transform duration-500"
                   id="logo-main"
                 />
                 <Image
                   src={motibaGemsLogo}
                   alt="logo"
-                  className="object-contain w-20 hover:scale-105 transition-transform duration-500 hidden"
+                  className="object-contain w-40 hover:scale-105 transition-transform duration-500 hidden"
                   id="logo-blue"
                 />
               </Link>
@@ -455,7 +455,7 @@ const Header = () => {
                   >
                     <ul className="grid ml-2 gap-3 mt-3">
                       <li>
-                        <Link
+                        {/* <Link
                           href={links.NATURAL_DIAMONDS}
                           onClick={onLinkClick}
                           className="flex gap-1 font-poppins text-sm capitalize text-secondary/80"
@@ -465,7 +465,7 @@ const Header = () => {
                             alt="natural diamonds icon"
                           />
                           <span>Natural Diamonds</span>
-                        </Link>
+                        </Link> */}
                       </li>
                       <li>
                         <Link

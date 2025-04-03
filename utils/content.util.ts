@@ -50,15 +50,15 @@ export const whyChooseUsContent = [
 ];
 
 export const products = [
-  {
-    image: productImage1,
-    title: "Natural Diamonds",
-    content: [
-      /* `Natural diamonds are often hailed as one of nature's most exquisite and cherished creations. Formed deep within the Earth's mantle over millions of years, these gems captivate with their mesmerizing brilliance and enduring beauty. Composed solely of pure carbon atoms arranged in a crystalline lattice structure, diamonds are renowned for their remarkable hardness, making them the toughest naturally occurring substance known to humanity.`, */
-      "Natural diamonds hold significant value due to their rarity, enduring beauty, and cultural significance. Prized for centuries as symbols of wealth & romance as well as love, natural diamonds are cherished for their unique optical properties and durability, making them ideal for use in jewelry. Beyond their intrinsic beauty, diamonds are associated with luxury and exclusivity, often regarded as investments and treasured heirlooms passed down through generations. This combination of scarcity, aesthetic appeal, cultural importance, and economic impact contributes to the enduring value of natural diamonds.",
-    ],
-    link: links.NATURAL_DIAMONDS,
-  },
+  // {
+  //   image: productImage1,
+  //   title: "Natural Diamonds",
+  //   content: [
+  //     /* `Natural diamonds are often hailed as one of nature's most exquisite and cherished creations. Formed deep within the Earth's mantle over millions of years, these gems captivate with their mesmerizing brilliance and enduring beauty. Composed solely of pure carbon atoms arranged in a crystalline lattice structure, diamonds are renowned for their remarkable hardness, making them the toughest naturally occurring substance known to humanity.`, */
+  //     "Natural diamonds hold significant value due to their rarity, enduring beauty, and cultural significance. Prized for centuries as symbols of wealth & romance as well as love, natural diamonds are cherished for their unique optical properties and durability, making them ideal for use in jewelry. Beyond their intrinsic beauty, diamonds are associated with luxury and exclusivity, often regarded as investments and treasured heirlooms passed down through generations. This combination of scarcity, aesthetic appeal, cultural importance, and economic impact contributes to the enduring value of natural diamonds.",
+  //   ],
+  //   link: links.NATURAL_DIAMONDS,
+  // },
   {
     image: productImage2,
     title: "Lab Grown Diamonds",

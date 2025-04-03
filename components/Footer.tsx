@@ -23,7 +23,7 @@ const Footer = () => {
             </Link>
             <div className="w-[80%] mt-2">
                 <p className="content-text break-words">
-                A manufacturer and supplier of Natural & Lab Grown Diamonds in both Certified & Non Certified in various sizes, color, clarity and shapes. as well as custom diamond jewelry.
+                A manufacturer and supplier of Lab Grown Diamonds & Lab Grown Diamonds Jewellery in both Certified & Non Certified in various sizes, color, clarity and shapes. as well as custom diamond jewelry.
                 </p>
             </div>
           </div>
