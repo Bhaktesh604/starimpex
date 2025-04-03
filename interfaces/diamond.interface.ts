@@ -1,0 +1,35 @@
+export interface DiamondSearch {
+  diamondType: string | null;
+  noBGM: Array<string> | null;
+  shapeList: Array<string> | null;
+  labList: Array<string> | null;
+  caratWeightList: Array<any> | null;
+  fancyIntensityList: Array<{ display: string; value: string }> | null;
+  fancyOvertoneList: Array<{ display: string; value: string }> | null;
+  fancyColorList: Array<object> | null;
+  colorList: Array<string> | null;
+  clarityList: Array<string> | null;
+  florescenceList: Array<string> | null;
+  cutList: Array<string> | null;
+  polishList: Array<string> | null;
+  symmetryList: Array<string> | null;
+  countryList: Array<{ country: string }> | null;
+  eyeCleanList: Array<{ display: string; value: string }> | null;
+  discountRange: object | null;
+  pricePerCaratRange: object | null;
+  totalPriceRange: object | null;
+  typeList: Array<string> | null;
+  tablePercentageRange: object | null;
+  depthPercentageRange: object | null;
+  lengthRange: object | null;
+  widthRange: object | null;
+  ratioRange: object | null;
+  crownHeightRange: object | null;
+  crownAngleRange: object | null;
+  pavilionHeightRange: object | null;
+  pavilionAngleRange: object | null;
+  girdlePercentageRange: object | null;
+  culetSizeList: Array<{ display: string; value: string }> | null;
+  keyToSymbolIncludeList: Array<{ symbol: string }> | null;
+  keyToSymbolExcludeList: Array<{ symbol: string }> | null;
+}

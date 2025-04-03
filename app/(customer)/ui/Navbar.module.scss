@@ -1,0 +1,46 @@
+.nav-links {
+    width: 80%;
+    background: white;
+    height: 100vh;
+    top: 0;
+    right: -100%;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+    transform-origin: right;
+    text-transform: capitalize;
+    .active-link {
+      &:after {
+        content: "";
+        background-color: rgb(2 64 147);
+        display: block;
+        width: 100%;
+        transform: scaleX(0.3);
+      }
+    }
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .nav-links {
+      width: 80%;
+      position: fixed;
+      background: white;
+      height: 100vh;
+      top: 0;
+      right: -100%;
+      z-index: 1;
+      transition: all 0.3s ease-in-out;
+      box-shadow: -5px 0 8px -2px rgba(0, 0, 0, 0.6);
+      transform-origin: right;
+      text-transform: capitalize;
+      .active-link {
+        &:after {
+          content: "";
+          background-color: rgb(2 64 147);
+          display: block;
+          width: 100%;
+          transform: scaleX(0.3);
+        }
+      }
+    } 
+  }
+  
