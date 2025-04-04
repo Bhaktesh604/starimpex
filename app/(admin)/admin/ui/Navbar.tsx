@@ -39,7 +39,8 @@ import close_icon from "@/public/assets/admin-dashboard/notif_close_icon.svg";
 import { formatNotificationTime } from "@/utils/helper";
 import Spinner from "@/components/Spinner";
 import { toast } from "react-toastify";
-import motibaGemsLogo from "@/public/assets/images/motiba-gems-logo.svg";
+// import motibaGemsLogo from "@/public/assets/images/motiba-gems-logo.svg";
+import motibaGemsLogo from "@/public/assets/images/starimpex.png";
 import Report from "./Report";
 import SearchIcon from "@/public/assets/customer-dashboard/ic-search.svg";
 

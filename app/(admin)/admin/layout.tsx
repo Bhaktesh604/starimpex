@@ -12,7 +12,7 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 export const metadata: Metadata = {
-  title: "Motiba Gems",
+  title: "Star Impex",
   description: "",
 };
 

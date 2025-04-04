@@ -253,7 +253,7 @@ export const jewelryDiamondsContent = {
   image: jewelryDiamondsImage,
   offerings: [
     "Engagement Rings, Earrings, Necklaces, Tennis Bracelets, Studs, and more",
-    "Natural Diamonds & Lab Grown Diamond Jewelry",
+    "Lab-Grown Diamond Jewellery & Lab Grown Diamond Jewelry",
     "In all Precious Metals like Gold, Silver, Platinum",
   ],
   otherContent:

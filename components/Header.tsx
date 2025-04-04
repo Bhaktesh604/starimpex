@@ -10,8 +10,10 @@ import chevronIcon from "@/public/assets/images/ic-chevron-white.svg";
 import naturalDiamondsIcon from "@/public/assets/images/ic-natural-diamonds-product.svg";
 import labGrowIcon from "@/public/assets/images/ic-lab-grown-product.svg";
 import diamondJewelryIcon from "@/public/assets/images/ic-diamond-jewelry-product.svg";
-import motibaGemsLogo from "@/public/assets/images/motiba-gems-logo.svg";
-import motibaGemsWhiteLogo from "@/public/assets/images/motiba-gems-logo-white.svg";
+// import motibaGemsLogo from "@/public/assets/images/motiba-gems-logo.svg";
+import motibaGemsLogo from "@/public/assets/images/starimpex.png";
+// import motibaGemsWhiteLogo from "@/public/assets/images/motiba-gems-logo-white.svg";
+import motibaGemsWhiteLogo from "@/public/assets/images/starimpex-white.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -393,13 +395,13 @@ const Header = () => {
                 <Image
                   src={navbarTheme.logo}
                   alt="logo"
-                  className="object-contain w-40 hover:scale-105 transition-transform duration-500"
+                  className="object-contain w-56 hover:scale-105 transition-transform duration-500"
                   id="logo-main"
                 />
                 <Image
                   src={motibaGemsLogo}
                   alt="logo"
-                  className="object-contain w-40 hover:scale-105 transition-transform duration-500 hidden"
+                  className="object-contain w-56 hover:scale-105 transition-transform duration-500 hidden"
                   id="logo-blue"
                 />
               </Link>

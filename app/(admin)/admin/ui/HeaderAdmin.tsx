@@ -19,7 +19,7 @@ const HeaderAdmin = () => {
                 <Image
                   src={motibaGemsLogo}
                   alt="logo"
-                  className="object-contain w-40 hover:scale-105 transition-transform duration-500"
+                  className="object-contain w-56 hover:scale-105 transition-transform duration-500"
                   id="logo-main"
                 />
               </Link>

@@ -6,7 +6,8 @@ import rapnetLogo from '@/public/assets/images/rapnet-logo.png';
 import giaLogo from '@/public/assets/images/gia-logo.png';
 import igiLogo from '@/public/assets/images/igi-logo.png';
 import hrdLogo from '@/public/assets/images/hrd-logo.png';
-import motibaGemsLogo from '@/public/assets/images/motiba-gems-logo.svg'
+// import motibaGemsLogo from '@/public/assets/images/motiba-gems-logo.svg'
+import motibaGemsLogo from '@/public/assets/images/starimpex.png'
 import Image from "next/image";
 import Link from "next/link";
 import { links } from "@/utils/links";
@@ -19,7 +20,7 @@ const Footer = () => {
         <div className="grid gap-5 sm:grid-cols-3 md:grid-cols-4 md:col-span-12 md:col-start-2">
           <div>
             <Link href={links.HOME}>
-              <Image src={motibaGemsLogo} alt="motiba gems logo" className="w-60 object-contain mb-4" />
+              <Image src={motibaGemsLogo} alt="star impex logo" className="w-60 object-contain mb-4" />
             </Link>
             <div className="w-[80%] mt-2">
                 <p className="content-text break-words">
@@ -112,7 +113,7 @@ const Footer = () => {
                   <Image src={giaLogo} alt="GIA logo"  className="w-[60px] object-contain" />
                   <Image src={igiLogo} alt="IGI logo"  className="w-[60px] object-contain" />
                   <Image src={hrdLogo} alt="HRD logo"  className="w-[60px] object-contain" />
-                  <Image src={rapnetLogo} alt="RAPNET logo" className="w-[60px] object-contain"  />
+                  {/* <Image src={rapnetLogo} alt="RAPNET logo" className="w-[60px] object-contain"  /> */}
             </div>
           </div>
         </div>

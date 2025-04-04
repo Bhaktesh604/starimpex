@@ -14,7 +14,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Motiba Gems",
+  title: "Star Impex",
   description: "",
 };
 

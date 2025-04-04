@@ -1,321 +1,133 @@
 "use client";
-import { sendInquiryApi } from "@/app/(customer)/api/support.api";
-import useApiRequest from "@/hooks/useApi";
-import { ResponseCodes } from "@/interfaces/response.interface";
-import { EDiamondTypes } from "@/utils/content.util";
-import { countryList } from "@/utils/country.util";
-import { isCountryValid, isEmailValid } from "@/utils/validation";
-import {
-  EMAIL_INVALID,
-  NAME_INVALID,
-  REQUIRED_ERROR,
-} from "@/utils/validationError";
-import { useRouter } from "next/navigation";
-import React, { FormEvent, useEffect, useState } from "react";
+
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { toast } from "react-toastify";
 
 const InquiryForm = () => {
-  const [phone, setPhone] = useState("");
-  const [country, setCountry] = useState("");
-  const [countryError, setCountryError] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [firstNameError, setFirstNameError] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [message, setMessage] = useState("");
-  const [messageError, setMessageError] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [diamondType, setDiamondType] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    companyName: "",
+    diamondType: "",
+    country: "",
+    message: ""
+  });
 
-  const router = useRouter();
+  const [messageStatus, setMessageStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // 🔄 Loader state
 
-  const {
-    loading: isSendInquiryRequestLoading,
-    data: sendInquiryResponse,
-    request: sendInquiryRequest,
-  } = useApiRequest(sendInquiryApi);
-
-  const onChangePhone = (e: any) => {
-    setPhone(e);
+  const inputChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const inputChangeHandler = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { value, name } = e.target;
-
-    if (name === "name" && value.trim().length <= 50) {
-      setFirstName(value);
-    }
-    if (name === "surname" && value.trim().length <= 50) {
-      setLastName(value);
-    }
-    if (name === "email") {
-      setEmail(value);
-      if (value.trim() && !isEmailValid(value.trim())) {
-        setEmailError(EMAIL_INVALID);
-      } else {
-        setEmailError("");
-      }
-      return;
-    }
-    if (name === "country") {
-      setCountry(value);
-      if (value.trim() && !isCountryValid(value.trim())) {
-        setCountryError(NAME_INVALID);
-      } else {
-        setCountryError("");
-      }
-    }
-    if (name === "message") {
-      setMessage(value);
-    }
-    if (name === "company-name" && value.trim().length <= 50) {
-      setCompanyName(value);
-    }
-    if (name === "diamond-type") {
-      setDiamondType(value);
-    }
-
-    if (firstName) {
-      setFirstNameError("");
-    }
-    if (lastName) {
-      setLastNameError("");
-    }
-    if (country) {
-      setCountryError("");
-    }
-    if (email) {
-      setEmailError("");
-    }
-    if (message) {
-      setMessageError("");
-    }
+  const onChangePhone = (value) => {
+    setFormData({ ...formData, phone: value });
   };
 
-  const onSubmitClickHandler = (e: FormEvent) => {
+  const onSubmitClickHandler = (e) => {
     e.preventDefault();
-    if (
-      firstNameError ||
-      lastNameError ||
-      countryError ||
-      emailError ||
-      messageError
-    ) {
-      return;
-    }
+    setIsLoading(true); // 🔄 Show loader
 
-    if (!firstName || !lastName || !country || !email || !message) {
-      if (!firstName) {
-        setFirstNameError(REQUIRED_ERROR);
-      }
-      if (!lastName) {
-        setLastNameError(REQUIRED_ERROR);
-      }
-      if (!country) {
-        setCountryError(REQUIRED_ERROR);
-      }
-      if (!email) {
-        setEmailError(REQUIRED_ERROR);
-      }
-      if (!message) {
-        setMessageError(REQUIRED_ERROR);
-      }
-      return;
-    }
-
-    sendInquiryRequest(
-      router,
-      firstName,
-      lastName,
-      email,
-      country,
-      message,
-      phone,
-      diamondType,
-      companyName
-    );
-
-    clearInputs();
-  };
-
-  useEffect(() => {
-    if (!isSendInquiryRequestLoading && sendInquiryResponse) {
-      if (sendInquiryResponse.responseCode === ResponseCodes.SUCCESS) {
-        toast.success(sendInquiryResponse.message);
-      }
-    }
-  }, [isSendInquiryRequestLoading, sendInquiryResponse]);
-
-  const clearInputs = () => {
-    setPhone("");
-    setCountry("");
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setMessage("");
-    setCompanyName("");
-    setDiamondType("");
+    emailjs.send(
+      "service_jrnjdss",
+      "template_0ynv3bf",
+      formData,
+      "P7tsu6N4ZVevQiGTy"
+    )
+    .then((response) => {
+      console.log("SUCCESS!", response.status, response.text);
+      setMessageStatus("Message sent successfully!");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        companyName: "",
+        diamondType: "",
+        country: "",
+        message: ""
+      });
+    })
+    .catch((err) => {
+      console.log("FAILED...", err);
+      setMessageStatus("Failed to send message. Please try again.");
+    })
+    .finally(() => {
+      setIsLoading(false); // ✅ Hide loader after response
+    });
   };
 
   return (
     <form
-      className="grid sm:grid-cols-2 sm:place-content-center gap-5 py-10 max-md:px-6 lg:px-6 bg-white"
+      className="grid sm:grid-cols-2 gap-5 py-10 px-6 bg-white"
       onSubmit={onSubmitClickHandler}
     >
       <div className="form-group">
-        <label className="form-label ml-3" htmlFor="inp-name">
-          First Name
-        </label>
-        <input
-          className="form-input"
-          type="text"
-          name="name"
-          id="inp-name"
-          placeholder="Enter your first name"
-          onChange={inputChangeHandler}
-          value={firstName}
-        />
-        <p className="text-red-600 ml-[1rem]">{firstNameError}</p>
-      </div>
-      <div className="form-group">
-        <label className="form-label ml-3" htmlFor="inp-surname">
-          Last Name
-        </label>
-        <input
-          className="form-input"
-          type="text"
-          name="surname"
-          id="inp-surname"
-          placeholder="Enter your last name"
-          onChange={inputChangeHandler}
-          value={lastName}
-        />
-        <p className="text-red-600 ml-[1rem]">{lastNameError}</p>
-      </div>
-      <div className="form-group">
-        <label className="form-label ml-3" htmlFor="inp-phone">
-          Phone
-        </label>
-        <PhoneInput
-          id="inp-phone"
-          defaultCountry="US"
-          focusInputOnCountrySelection={false}
-          value={phone}
-          onChange={onChangePhone}
-          international
-          countryCallingCodeEditable={false}
-          className="form-input !px-2 !outline-none focus:!outline-none"
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label ml-3" htmlFor="inp-email">
-          Email
-        </label>
-        <input
-          className="form-input"
-          type="text"
-          name="email"
-          id="inp-email"
-          placeholder="Enter your email"
-          onChange={inputChangeHandler}
-          value={email}
-        />
-        <p className="text-red-600 ml-[1rem]">{emailError}</p>
+        <label className="form-label ml-3">First Name</label>
+        <input className="form-input" type="text" name="firstName" placeholder="Enter your first name" value={formData.firstName} onChange={inputChangeHandler} required />
       </div>
 
       <div className="form-group">
-        <label className="form-label ml-3" htmlFor="inp-companyname">
-          Company Name
-        </label>
-        <input
-          className="form-input"
-          type="text"
-          name="company-name"
-          id="inp-companyname"
-          placeholder="Enter your company name"
-          onChange={inputChangeHandler}
-          value={companyName}
-        />
+        <label className="form-label ml-3">Last Name</label>
+        <input className="form-input" type="text" name="lastName" placeholder="Enter your last name" value={formData.lastName} onChange={inputChangeHandler} required />
       </div>
 
       <div className="form-group">
-        <label className="form-label ml-3" htmlFor="inp-diamond-type">
-          Diamond Type
-        </label>
-        <div>
-          <select
-            id="inp-diamond-type"
-            name="diamond-type"
-            className="form-input w-full"
-            value={diamondType}
-            onChange={inputChangeHandler}
-          >
-            <option disabled value="">
-              Select Diamond Type
-            </option>
-            <option value={EDiamondTypes.NATURAL_DIAMONDS}>
-              Natural Diamonds
-            </option>
-            <option value={EDiamondTypes.LAB_GROWN_DIAMONDS_CVD}>
-              Lab Grown Diamonds (CVD)
-            </option>
-            <option value={EDiamondTypes.LAB_GROWN_DIAMONDS_HPHT}>
-              Lab Grown Diamonds (HPHT)
-            </option>
-          </select>
-        </div>
+        <label className="form-label ml-3">Phone</label>
+        <PhoneInput className="form-input" value={formData.phone} onChange={onChangePhone} required />
+      </div>
+
+      <div className="form-group">
+        <label className="form-label ml-3">Email</label>
+        <input className="form-input" type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={inputChangeHandler} required />
+      </div>
+
+      <div className="form-group">
+        <label className="form-label ml-3">Company Name</label>
+        <input className="form-input" type="text" name="companyName" placeholder="Enter your company name" value={formData.companyName} onChange={inputChangeHandler} required />
+      </div>
+
+      <div className="form-group">
+        <label className="form-label ml-3">Diamond Type</label>
+        <select name="diamondType" className="form-input" value={formData.diamondType} onChange={inputChangeHandler} required>
+          <option value="">Select Diamond Type</option>
+          <option value="Natural Diamonds">Natural Diamonds</option>
+          <option value="Lab Grown Diamonds (CVD)">Lab Grown Diamonds (CVD)</option>
+          <option value="Lab Grown Diamonds (HPHT)">Lab Grown Diamonds (HPHT)</option>
+        </select>
       </div>
 
       <div className="form-group sm:col-span-2">
-        <label className="form-label ml-3" htmlFor="inp-country">
-          Country
-        </label>
-        <div>
-          <select
-            id="inp-country"
-            name="country"
-            className="form-input w-full"
-            value={country}
-            onChange={inputChangeHandler}
-          >
-            <option disabled value="">
-              Select Country
-            </option>
-            {countryList.map((data, index) => (
-              <option value={data.country} key={`country-${index}`}>
-                {data.country}
-              </option>
-            ))}
-          </select>
-          <p className="text-red-600 ml-[1rem]">{countryError}</p>
-        </div>
+        <label className="form-label ml-3">Country</label>
+        <select name="country" className="form-input" value={formData.country} onChange={inputChangeHandler} required>
+          <option value="">Select Country</option>
+          <option value="USA">USA</option>
+          <option value="India">India</option>
+          <option value="UK">UK</option>
+        </select>
       </div>
+
       <div className="form-group sm:col-span-2">
-        <label className="form-label ml-3" htmlFor="inp-message">
-          Message
-        </label>
-        <textarea
-          className="form-input"
-          name="message"
-          id="inp-message"
-          placeholder="Describe your message..."
-          rows={7}
-          onChange={inputChangeHandler}
-          value={message}
-        />
-        <p className="text-red-600 ml-[1rem]">{messageError}</p>
+        <label className="form-label ml-3">Message</label>
+        <textarea className="form-input" name="message" placeholder="Describe your message..." rows={5} value={formData.message} onChange={inputChangeHandler} required />
       </div>
+
       <div className="mx-auto sm:col-span-2">
-        <button className="btn btn-tertiary !px-8 !py-2.5">Submit</button>
+        <button className="btn btn-tertiary px-8 py-2.5 flex items-center justify-center" disabled={isLoading}>
+          {isLoading ? (
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          ) : (
+            "Submit"
+          )}
+        </button>
       </div>
+
+      {messageStatus && <p className="text-center text-green-600">{messageStatus}</p>}
     </form>
   );
 };
