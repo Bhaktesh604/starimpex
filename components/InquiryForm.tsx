@@ -48,19 +48,30 @@ const InquiryForm: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    // ✅ Convert formData to a plain object
+    const emailData = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+      email: formData.email,
+      companyName: formData.companyName,
+      diamondType: formData.diamondType,
+      country: formData.country,
+      message: formData.message
+    };
+
     emailjs
       .send(
         "service_jrnjdss",
         "template_0ynv3bf",
-        formData,
+        emailData, // ✅ Sending plain object
         "P7tsu6N4ZVevQiGTy"
       )
       .then((response) => {
         console.log("SUCCESS!", response.status, response.text);
         toast.success("✅ Message sent successfully!", { position: "top-right", autoClose: 3000 });
 
-        setFormData((prevData) => ({
-          ...prevData,
+        setFormData({
           firstName: "",
           lastName: "",
           phone: "",
@@ -69,7 +80,7 @@ const InquiryForm: React.FC = () => {
           diamondType: "",
           country: "",
           message: ""
-        }));
+        });
       })
       .catch((err) => {
         console.log("FAILED...", err);
